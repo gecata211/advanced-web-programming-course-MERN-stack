@@ -37,6 +37,9 @@ class AddTask extends React.Component {
       taskName: this.state.taskName,
       isDone: false
     });
+    this.setState({
+      taskName: ""
+    });
   }
 }
 
