@@ -1,13 +1,9 @@
-import React, { Component } from "react";
+import React from "react";
 import List from "./List";
 
 class App extends React.Component {
   render() {
-    return (
-      <div>
-        <List />
-      </div>
-    );
+    return <List />;
   }
 }
 
