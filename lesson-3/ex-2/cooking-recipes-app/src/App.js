@@ -2,6 +2,7 @@ import React from "react";
 import Recipes from "./Recipes";
 import { Router } from "@reach/router";
 import Recipe from "./Recipe";
+import NotFound from "./NotFound";
 
 class App extends React.Component {
   constructor(props) {
@@ -147,6 +148,7 @@ class App extends React.Component {
           path="/recipe/:recipeSlug"
           getRecipe={slug => this.getRecipe(slug)}
         />
+        <NotFound default="true" />
       </Router>
     );
   }
