@@ -10,24 +10,7 @@ class App extends React.Component {
     super(props);
 
     this.state = {
-      questions: [
-        {
-          slug: "question-1",
-          title: "question 1",
-          answers: [
-            { title: "answer 1", correct: true },
-            { title: "answer 2", correct: false },
-            { title: "answer 3", correct: false }
-          ],
-          solved: true
-        },
-        {
-          slug: "question-2",
-          title: "question 2",
-          answers: [{ title: "answer 1", correct: false }],
-          solved: false
-        }
-      ]
+      questions: []
     };
   }
 

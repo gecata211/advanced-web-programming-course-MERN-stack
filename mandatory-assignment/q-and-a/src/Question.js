@@ -8,7 +8,7 @@ class Question extends React.Component {
 
     this.question.answers.forEach((answer, index) => {
       answers.push(
-        <div>
+        <div key={index}>
           <h4>Answer {index + 1}</h4>
           <p>{answer.title}</p>
         </div>
