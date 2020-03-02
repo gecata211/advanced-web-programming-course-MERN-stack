@@ -7,30 +7,35 @@ class List extends React.Component {
     super(props);
 
     this.state = {
-      todos: [
-        {
-          taskName: "Do something",
-          isDone: false
-        },
-        {
-          taskName: "Do something 2",
-          isDone: false
-        },
-        {
-          taskName: "Do something 3",
-          isDone: true
-        },
-        {
-          taskName: "Do something 4",
-          isDone: false
-        },
-        {
-          taskName: "Do something 5",
-          isDone: true
-        }
-      ]
+      todos: []
     };
     this.addTask = this.addTask.bind(this);
+  }
+
+  componentDidMount() {
+    this.getTodoData();
+  }
+
+  async getTodoData() {
+    const url = "https://krdo-todo-api.herokuapp.com/api/tasks";
+    const response = await fetch(url);
+    const data = await response.json();
+
+    let todos = [];
+    data.forEach(todoData => {
+      let todo = {};
+
+      if (todoData.id && todoData.text) {
+        todo["taskName"] = todoData.text;
+        todo["isDone"] = todoData.done;
+
+        todos.push(todo);
+      }
+
+      this.setState({
+        todos: todos
+      });
+    });
   }
 
   addTask(task) {
