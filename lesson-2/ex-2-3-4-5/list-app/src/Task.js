@@ -6,7 +6,8 @@ class Task extends React.Component {
 
     this.state = {
       taskName: props.taskData.taskName,
-      isDone: props.taskData.isDone
+      isDone: props.taskData.isDone,
+      id: props.taskData.id
     };
 
     this.handleCheckboxChange = this.handleCheckboxChange.bind(this);
@@ -28,6 +29,7 @@ class Task extends React.Component {
     this.setState({
       isDone: event.target.checked
     });
+    // this.props.putTask(this.state);
   }
 }
 
