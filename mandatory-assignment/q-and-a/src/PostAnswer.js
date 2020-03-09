@@ -32,7 +32,7 @@ class PostAnswer extends React.Component {
             <input type="submit" value="Post"></input>
           </div>
         </form>
-        <Link to="/questions">Go back</Link>
+        <Link to="/">Go back</Link>
       </div>
     );
   }
@@ -54,7 +54,7 @@ class PostAnswer extends React.Component {
       this.setState({
         newAnswer: ""
       });
-      navigate(`/question/${this.question.slug}`);
+      navigate("/");
     }
   }
 }

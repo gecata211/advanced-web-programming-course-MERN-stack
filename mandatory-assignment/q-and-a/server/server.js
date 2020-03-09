@@ -38,12 +38,12 @@ const questions = [
 // Return all recipes in data
 app.get("/api/questions", (req, res) => res.json(questions));
 
-// Return the recipe in data with its id equal to ':id' in the route below.
-app.get("/api/questions/:id", (req, res) => {
-  const id = req.params.id;
-  const question = questions.find(e => e.id === parseInt(id));
-  res.json(question);
-});
+// // Return the recipe in data with its id equal to ':id' in the route below.
+// app.get("/api/questions/:id", (req, res) => {
+//   const id = req.params.id;
+//   const question = questions.find(e => e.id === parseInt(id));
+//   res.json(question);
+// });
 
 app.post("/api/questions", (req, res) => {
   const question = req.body;
@@ -60,12 +60,14 @@ app.post("/api/questions", (req, res) => {
   res.json(questions);
 });
 
-app.post("/api/recipes/:id/ingredients", (req, res) => {
-  // TODO: Add new ingredient
-});
+app.put("/api/questions/:slug", (req, res) => {
+  const slug = req.params.slug;
 
-// TODO: Example of handling PUT
-// TODO: Example of handling DELETE
+  const question = questions.find(question => question.slug === slug);
+  question.answers.push(req.body);
+
+  res.json(questions);
+});
 
 /**** Start! ****/
 app.listen(port, () => console.log(`${appName} API running on port ${port}!`));

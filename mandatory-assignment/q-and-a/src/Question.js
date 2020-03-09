@@ -20,7 +20,7 @@ class Question extends React.Component {
         <h2 className="question__title">{this.question.title}</h2>
         <div className="question__answers">{answers}</div>
 
-        <Link to={`/question/${this.question.slug}/post-answer`}>
+        <Link to={`/questions/${this.question.slug}/post-answer`}>
           <div>You know the answer?</div>
         </Link>
 
