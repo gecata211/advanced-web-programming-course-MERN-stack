@@ -47,7 +47,7 @@ class PostAnswer extends React.Component {
     if (this.state.newAnswer) {
       let answerObj = {
         title: this.state.newAnswer,
-        correct: false
+        voteNumber: 0
       };
 
       this.props.addAnswer(answerObj, this.question.slug);

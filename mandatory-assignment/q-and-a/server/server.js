@@ -19,16 +19,16 @@ const questions = [
     slug: "question-1",
     title: "question 1",
     answers: [
-      { title: "answer 1", correct: true },
-      { title: "answer 2", correct: false },
-      { title: "answer 3", correct: false }
+      { slug: "answer-1", title: "answer 1", voteNumber: 2 },
+      { slug: "answer-2", title: "answer 2", voteNumber: 0 },
+      { slug: "answer-3", title: "answer 3", voteNumber: 7 }
     ],
     solved: true
   },
   {
     slug: "question-2",
     title: "question 2",
-    answers: [{ title: "answer 1", correct: false }],
+    answers: [{ slug: "answer-1", title: "answer 1", voteNumber: 10 }],
     solved: false
   }
 ];
@@ -65,6 +65,17 @@ app.put("/api/questions/:slug", (req, res) => {
 
   const question = questions.find(question => question.slug === slug);
   question.answers.push(req.body);
+
+  res.json(questions);
+});
+
+app.put("/api/questions/:questionSlug/:answerSlug", (req, res) => {
+  const questionSlug = req.params.questionSlug;
+  const answerSlug = req.params.answerSlug;
+
+  const question = questions.find(question => question.slug === questionSlug);
+  question.answers.find(answer => answer.slug === answerSlug).voteNumber =
+    req.body.newVoteNumber;
 
   res.json(questions);
 });

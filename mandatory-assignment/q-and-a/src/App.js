@@ -69,6 +69,25 @@ class App extends React.Component {
       });
   }
 
+  voteForAnswer(questionSlug, answerSlug, newVoteNumber) {
+    fetch(`http://localhost:8080/api/questions/${questionSlug}/${answerSlug}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({ newVoteNumber: newVoteNumber })
+    })
+      .then(function(response) {
+        return response.json();
+      })
+      .then(data => {
+        this.setState({
+          questions: data
+        });
+        navigate(`/questions/${questionSlug}`);
+      });
+  }
+
   render() {
     return (
       <Router>
@@ -76,6 +95,9 @@ class App extends React.Component {
         <Question
           path="/questions/:questionSlug"
           getQuestion={slug => this.getQuestion(slug)}
+          voteForAnswer={(questionSlug, answerSlug, newVoteNumber) =>
+            this.voteForAnswer(questionSlug, answerSlug, newVoteNumber)
+          }
         />
         <AskQuestion
           path="/questions/ask"
