@@ -14,17 +14,40 @@ class App extends React.Component {
     };
   }
 
+  componentDidMount() {
+    this.getAllQuestions();
+  }
+
+  getAllQuestions() {
+    fetch("http://localhost:8080/api/questions")
+      .then(response => {
+        return response.json();
+      })
+      .then(data => {
+        this.setState({
+          questions: data
+        });
+      });
+  }
+
   getQuestion(slug) {
     return this.state.questions.find(question => question.slug === slug);
   }
   addQuestion(question) {
-    this.setState(state => {
-      let list = state.questions.concat(question);
-
-      return {
-        questions: list
-      };
-    });
+    console.log(question);
+    fetch("http://localhost:8080/api/questions", {
+      method: "post",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(question)
+    })
+      .then(function(response) {
+        return response.json();
+      })
+      .then(function(data) {
+        console.log(data);
+      });
   }
   addAnswer(answer, slug) {
     this.setState(state => {

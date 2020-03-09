@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "@reach/router";
+import { Link, redirectTo, navigate } from "@reach/router";
 
 class AskQuestion extends React.Component {
   constructor(props) {
@@ -40,10 +40,6 @@ class AskQuestion extends React.Component {
   handleChange(event) {
     this.setState({
       newQuestion: {
-        slug: event.target.value
-          .toLowerCase()
-          .split(" ")
-          .join("-"),
         title: event.target.value
       }
     });
@@ -53,17 +49,14 @@ class AskQuestion extends React.Component {
     event.preventDefault();
     if (this.state.newQuestion.title) {
       this.props.addQuestion({
-        slug: this.state.newQuestion.slug,
-        title: this.state.newQuestion.title,
-        answers: [],
-        solved: false
+        title: this.state.newQuestion.title
       });
       this.setState({
         newQuestion: {
-          slug: "",
           title: ""
         }
       });
+      navigate("/");
     }
   }
 }

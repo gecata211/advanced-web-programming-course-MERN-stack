@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "@reach/router";
+import { Link, redirectTo, navigate } from "@reach/router";
 
 class PostAnswer extends React.Component {
   constructor(props) {
@@ -32,7 +32,7 @@ class PostAnswer extends React.Component {
             <input type="submit" value="Post"></input>
           </div>
         </form>
-        <Link to="/">Go back</Link>
+        <Link to="/questions">Go back</Link>
       </div>
     );
   }
@@ -54,6 +54,7 @@ class PostAnswer extends React.Component {
       this.setState({
         newAnswer: ""
       });
+      navigate(`/question/${this.question.slug}`);
     }
   }
 }
