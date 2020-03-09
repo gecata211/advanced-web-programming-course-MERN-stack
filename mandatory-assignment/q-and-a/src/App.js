@@ -1,7 +1,7 @@
 import React from "react";
 import Questions from "./Questions";
 import Question from "./Question";
-import { Router } from "@reach/router";
+import { Router, createHistory } from "@reach/router";
 import AskQuestion from "./AskQuestion";
 import PostAnswer from "./PostAnswer";
 
@@ -34,7 +34,6 @@ class App extends React.Component {
     return this.state.questions.find(question => question.slug === slug);
   }
   addQuestion(question) {
-    console.log(question);
     fetch("http://localhost:8080/api/questions", {
       method: "post",
       headers: {
@@ -45,8 +44,10 @@ class App extends React.Component {
       .then(function(response) {
         return response.json();
       })
-      .then(function(data) {
-        console.log(data);
+      .then(data => {
+        this.setState({
+          questions: data
+        });
       });
   }
   addAnswer(answer, slug) {

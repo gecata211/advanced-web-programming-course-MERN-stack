@@ -53,8 +53,8 @@ app.post("/api/questions", (req, res) => {
       .split(" ")
       .join("-"),
     title: question.title,
-    solved: question.answers.find(asnwer => asnwer.correct === true),
-    answers: question.answers
+    solved: false,
+    answers: []
   };
   questions.push(newQuestion);
   res.json(questions);
