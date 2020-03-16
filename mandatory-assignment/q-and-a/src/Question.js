@@ -11,19 +11,20 @@ class Question extends React.Component {
   question = this.props.getQuestion(this.props.questionSlug);
 
   handleChange(index, event) {
-    console.log(this.question.answers[index]);
-    if (event.target.value) {
+    if (event.target.checked) {
       this.props.voteForAnswer(
         this.question.slug,
         this.question.answers[index].slug,
         Number(this.question.answers[index].voteNumber) + 1
       );
+      this.question.answers[index].voteNumber++;
     } else {
       this.props.voteForAnswer(
         this.question.slug,
         this.question.answers[index].slug,
         Number(this.question.answers[index].voteNumber) - 1
       );
+      this.question.answers[index].voteNumber--;
     }
   }
 
@@ -44,6 +45,7 @@ class Question extends React.Component {
             <label>Vote</label>
             <input
               type="checkbox"
+              value
               onChange={e => this.handleChange(index, e)}
             ></input>
           </form>
