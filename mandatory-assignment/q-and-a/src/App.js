@@ -19,7 +19,7 @@ class App extends React.Component {
   }
 
   getAllQuestions() {
-    fetch("http://localhost:8080/api/questions")
+    fetch("http://localhost:3000/api/questions")
       .then(response => {
         return response.json();
       })
@@ -34,7 +34,7 @@ class App extends React.Component {
     return this.state.questions.find(question => question.slug === slug);
   }
   addQuestion(question) {
-    fetch("http://localhost:8080/api/questions", {
+    fetch("http://localhost:3000/api/questions", {
       method: "post",
       headers: {
         "Content-Type": "application/json"
@@ -51,7 +51,7 @@ class App extends React.Component {
       });
   }
   addAnswer(answer, slug) {
-    fetch(`http://localhost:8080/api/questions/${slug}`, {
+    fetch(`http://localhost:3000/api/questions/${slug}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json"
@@ -70,7 +70,8 @@ class App extends React.Component {
   }
 
   voteForAnswer(questionSlug, answerSlug, newVoteNumber) {
-    fetch(`http://localhost:8080/api/questions/${questionSlug}/${answerSlug}`, {
+    console.log(newVoteNumber);
+    fetch(`http://localhost:3000/api/questions/${questionSlug}/${answerSlug}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json"
