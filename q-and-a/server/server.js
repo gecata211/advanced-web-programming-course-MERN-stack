@@ -5,9 +5,11 @@ import bodyParser from "body-parser";
 import morgan from "morgan";
 import cors from "cors";
 
-const db = mongoose.connect(
-  "mongodb+srv://georgi-dimitrov:86m1sL06VD97b7uX@cluster0-qdyxt.mongodb.net/awp-q-and-a?retryWrites=true&w=majority"
-);
+const db = mongoose
+  .connect(
+    "mongodb+srv://georgi-dimitrov:86m1sL06VD97b7uX@cluster0-qdyxt.mongodb.net/awp-q-and-a?retryWrites=true&w=majority"
+  )
+  .catch(err => console.error(err));
 const port = process.env.PORT || 8080;
 const app = express();
 
