@@ -11,12 +11,8 @@ const questionRouter = express.Router();
       });
     })
     .post((req, res) => {
-      console.log(req.body);
       new Question({
-        slug: req.body.title
-          .toLowerCase()
-          .split(" ")
-          .join("-"),
+        slug: string_to_slug(req.body.title),
         title: req.body.title,
         answers: [],
         solved: false
@@ -31,7 +27,7 @@ const questionRouter = express.Router();
     .route("/:slug")
     .get((req, res) => {
       const slug = req.params.slug;
-      Question.find({ slug: slug }, (err, question) => {
+      Question.findOne({ slug: slug }, (err, question) => {
         res.json(question);
       });
     })
@@ -39,10 +35,7 @@ const questionRouter = express.Router();
       const slug = req.params.slug;
 
       let answer = req.body;
-      answer.slug = answer.title
-        .toLowerCase()
-        .split(" ")
-        .join("-");
+      answer.slug = string_to_slug(answer.title);
 
       Question.findOneAndUpdate(
         { slug: slug },
@@ -62,7 +55,7 @@ const questionRouter = express.Router();
 
     Question.findOne({ slug: questionSlug }, (err, question) => {
       if (err) {
-        console.log(err);
+        console.error(err);
       }
 
       let questionToUpdate = (question.answers.find(
@@ -87,4 +80,22 @@ const questionRouter = express.Router();
   });
 })();
 
+function string_to_slug(str) {
+  str = str.replace(/^\s+|\s+$/g, ""); // trim
+  str = str.toLowerCase();
+
+  // remove accents, swap ñ for n, etc
+  var from = "àáäâèéëêìíïîòóöôùúüûñç·/_,:;";
+  var to = "aaaaeeeeiiiioooouuuunc------";
+  for (var i = 0, l = from.length; i < l; i++) {
+    str = str.replace(new RegExp(from.charAt(i), "g"), to.charAt(i));
+  }
+
+  str = str
+    .replace(/[^a-z0-9 -]/g, "") // remove invalid chars
+    .replace(/\s+/g, "-") // collapse whitespace and replace by -
+    .replace(/-+/g, "-"); // collapse dashes
+
+  return str;
+}
 export default questionRouter;

@@ -33,7 +33,7 @@ class AskQuestion extends React.Component {
             <input type="submit" value="Ask"></input>
           </div>
         </form>
-        <Link to="/">Go back</Link>
+        <Link to="/questions">Go back</Link>
       </div>
     );
   }

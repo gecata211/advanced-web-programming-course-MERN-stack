@@ -6,35 +6,60 @@ class PostAnswer extends React.Component {
     super(props);
 
     this.state = {
-      newAnswer: ""
+      newAnswer: "",
+      question: {
+        title: ""
+      }
     };
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  question = this.props.getQuestion(this.props.questionSlug);
+  componentDidMount() {
+    this._asyncRequest = this.props
+      .getQuestion(this.props.questionSlug)
+      .then(response => {
+        this._asyncRequest = null;
+        return response.json();
+      })
+      .then(data => {
+        console.log(data);
+        this.setState({
+          question: data
+        });
+      });
+  }
+  componentWillUnmount() {
+    if (this._asyncRequest) {
+      this._asyncRequest.cancel();
+    }
+  }
 
   render() {
-    return (
-      <div className="post-answer">
-        <h2>{this.question.title}</h2>
-        <form onSubmit={this.handleSubmit}>
-          <div className="post-answer__answer">
-            <label htmlFor="answer">Answer</label>
-            <textarea
-              value={this.state.newAnswer}
-              name="answer"
-              onChange={this.handleChange}
-            ></textarea>
-          </div>
-          <div className="post-answer__submit-button">
-            <input type="submit" value="Post"></input>
-          </div>
-        </form>
-        <Link to="/">Go back</Link>
-      </div>
-    );
+    if (this.state.question === null) {
+      return "Loading";
+    } else {
+      return (
+        <div className="post-answer">
+          <h2>{this.state.question.title}</h2>
+          <form onSubmit={this.handleSubmit}>
+            <div className="post-answer__answer">
+              <label htmlFor="answer">Answer</label>
+              <textarea
+                value={this.state.newAnswer}
+                name="answer"
+                onChange={this.handleChange}
+              ></textarea>
+            </div>
+            <div className="post-answer__submit-button">
+              <input type="submit" value="Post"></input>
+            </div>
+          </form>
+          <Link to="/questions">Go back</Link>
+        </div>
+      );
+    }
   }
   handleChange(event) {
     this.setState({
@@ -50,11 +75,11 @@ class PostAnswer extends React.Component {
         voteNumber: 0
       };
 
-      this.props.addAnswer(answerObj, this.question.slug);
+      this.props.addAnswer(answerObj, this.state.question.slug);
       this.setState({
         newAnswer: ""
       });
-      navigate("/");
+      navigate("/questions");
     }
   }
 }

@@ -1,7 +1,7 @@
 import React from "react";
 import Questions from "./Questions";
 import Question from "./Question";
-import { Router, createHistory, navigate } from "@reach/router";
+import { Router, Redirect, navigate } from "@reach/router";
 import AskQuestion from "./AskQuestion";
 import PostAnswer from "./PostAnswer";
 
@@ -70,7 +70,6 @@ class App extends React.Component {
   }
 
   voteForAnswer(questionSlug, answerSlug, newVoteNumber) {
-    console.log(newVoteNumber);
     fetch(`http://localhost:5656/api/questions/${questionSlug}/${answerSlug}`, {
       method: "PUT",
       headers: {
@@ -92,7 +91,7 @@ class App extends React.Component {
   render() {
     return (
       <Router>
-        <Questions path="/" questions={this.state.questions} />
+        <Redirect from="/" to="/questions" noThrow />
         <Questions path="/questions" questions={this.state.questions} />
         <Question
           path="/questions/:questionSlug"
