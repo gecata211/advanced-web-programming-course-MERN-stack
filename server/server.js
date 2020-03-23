@@ -24,7 +24,7 @@ app.use("/api/questions", questionRouter);
 // routes go here
 
 app.get("*", (req, res) => {
-  res.sendFile(path.resolve("..", "client", "build", "index.html"));
+  res.sendFile(path.resolve("../client/build/index.html"));
 });
 
 app.listen(port, () => {
