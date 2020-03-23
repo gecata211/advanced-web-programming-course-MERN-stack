@@ -1,5 +1,5 @@
 import React from "react";
-import { Link, navigate } from "@reach/router";
+import { Link } from "@reach/router";
 
 class Question extends React.Component {
   constructor(props) {
@@ -39,14 +39,23 @@ class Question extends React.Component {
         this.state.question.answers[index].slug,
         Number(this.state.question.answers[index].voteNumber) + 1
       );
-      this.state.question.answers[index].voteNumber++;
+
+      let newQuestion = this.state.question;
+      this.newQuestion.answers[index].voteNumber++;
+      this.setState({
+        question: newQuestion
+      });
     } else {
       this.props.voteForAnswer(
         this.state.question.slug,
         this.state.question.answers[index].slug,
         Number(this.state.question.answers[index].voteNumber) - 1
       );
-      this.state.question.answers[index].voteNumber--;
+      let newQuestion = this.state.question;
+      this.newQuestion.answers[index].voteNumber--;
+      this.setState({
+        question: newQuestion
+      });
     }
   }
 

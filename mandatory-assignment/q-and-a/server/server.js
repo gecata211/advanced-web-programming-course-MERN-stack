@@ -8,7 +8,7 @@ import cors from "cors";
 const db = mongoose.connect(
   "mongodb+srv://georgi-dimitrov:86m1sL06VD97b7uX@cluster0-qdyxt.mongodb.net/awp-q-and-a?retryWrites=true&w=majority"
 );
-const port = process.env.PORT || 5656;
+const port = process.env.PORT || 8080;
 const app = express();
 
 app.use(bodyParser.json()); // Add middleware that parses JSON from the request body.

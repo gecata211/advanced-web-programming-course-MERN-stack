@@ -1,5 +1,5 @@
 import React from "react";
-import { Link, redirectTo, navigate } from "@reach/router";
+import { Link, navigate } from "@reach/router";
 
 class PostAnswer extends React.Component {
   constructor(props) {
