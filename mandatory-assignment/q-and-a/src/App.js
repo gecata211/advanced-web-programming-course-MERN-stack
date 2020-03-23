@@ -31,7 +31,7 @@ class App extends React.Component {
   }
 
   getQuestion(slug) {
-    return this.state.questions.find(question => question.slug === slug);
+    return fetch(`http://localhost:5656/api/questions/${slug}`);
   }
   addQuestion(question) {
     fetch("http://localhost:5656/api/questions", {
@@ -93,6 +93,7 @@ class App extends React.Component {
     return (
       <Router>
         <Questions path="/" questions={this.state.questions} />
+        <Questions path="/questions" questions={this.state.questions} />
         <Question
           path="/questions/:questionSlug"
           getQuestion={slug => this.getQuestion(slug)}

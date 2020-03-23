@@ -27,25 +27,33 @@ const questionRouter = express.Router();
       });
     });
 
-  questionRouter.route("/:slug").put((req, res) => {
-    const slug = req.params.slug;
+  questionRouter
+    .route("/:slug")
+    .get((req, res) => {
+      const slug = req.params.slug;
+      Question.find({ slug: slug }, (err, question) => {
+        res.json(question);
+      });
+    })
+    .put((req, res) => {
+      const slug = req.params.slug;
 
-    let answer = req.body;
-    answer.slug = answer.title
-      .toLowerCase()
-      .split(" ")
-      .join("-");
+      let answer = req.body;
+      answer.slug = answer.title
+        .toLowerCase()
+        .split(" ")
+        .join("-");
 
-    Question.findOneAndUpdate(
-      { slug: slug },
-      { $push: { answers: answer } },
-      () => {
-        Question.find({}, (err, questions) => {
-          res.json(questions);
-        });
-      }
-    );
-  });
+      Question.findOneAndUpdate(
+        { slug: slug },
+        { $push: { answers: answer } },
+        () => {
+          Question.find({}, (err, questions) => {
+            res.json(questions);
+          });
+        }
+      );
+    });
 
   questionRouter.route("/:questionSlug/:answerSlug").put((req, res) => {
     const questionSlug = req.params.questionSlug;
@@ -56,9 +64,10 @@ const questionRouter = express.Router();
       if (err) {
         console.log(err);
       }
-      question.answers.find(
+
+      let questionToUpdate = (question.answers.find(
         answer => answer.slug === answerSlug
-      ).voteNumber = newVote;
+      )["voteNumber"] = newVote);
 
       Question.findOneAndUpdate(
         { slug: questionSlug },
