@@ -21,6 +21,11 @@ app.use(cors()); // Avoid CORS errors. https://en.wikipedia.org/wiki/Cross-origi
 
 app.use("/api/questions", questionRouter);
 // routes go here
+
+app.get("*", (req, res) => {
+  res.sendFile(path.resolve("..", "client", "build", "index.html"));
+});
+
 app.listen(port, () => {
   console.log(`http://localhost:${port}`);
 });
