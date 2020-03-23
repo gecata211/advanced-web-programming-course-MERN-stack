@@ -4,6 +4,7 @@ import mongoose from "mongoose";
 import bodyParser from "body-parser";
 import morgan from "morgan";
 import cors from "cors";
+import path from "path";
 
 const db = mongoose
   .connect(
