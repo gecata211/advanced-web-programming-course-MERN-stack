@@ -23,6 +23,7 @@ app.use(cors()); // Avoid CORS errors. https://en.wikipedia.org/wiki/Cross-origi
 app.use("/api/questions", questionRouter);
 // routes go here
 
+app.use(express.static("../client/build")); // Needed for serving production build of React
 app.get("*", (req, res) => {
   res.sendFile(path.resolve("..", "client", "build", "index.html"));
 });
