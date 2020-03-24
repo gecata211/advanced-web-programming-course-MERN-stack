@@ -14,12 +14,14 @@ class App extends React.Component {
     };
   }
 
+  API_URL = process.env.REACT_APP_API_URL;
+
   componentDidMount() {
     this.getAllQuestions();
   }
 
   getAllQuestions() {
-    fetch("http://localhost:8080/api/questions")
+    fetch(`${this.API_URL}/questions`)
       .then(response => {
         return response.json();
       })
@@ -31,10 +33,10 @@ class App extends React.Component {
   }
 
   getQuestion(slug) {
-    return fetch(`http://localhost:8080/api/questions/${slug}`);
+    return fetch(`${this.API_URL}/questions/${slug}`);
   }
   addQuestion(question) {
-    fetch("http://localhost:8080/api/questions", {
+    fetch(`${this.API_URL}/questions`, {
       method: "post",
       headers: {
         "Content-Type": "application/json"
@@ -51,7 +53,7 @@ class App extends React.Component {
       });
   }
   addAnswer(answer, slug) {
-    fetch(`http://localhost:8080/api/questions/${slug}`, {
+    fetch(`${this.API_URL}/questions/${slug}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json"
@@ -70,7 +72,7 @@ class App extends React.Component {
   }
 
   voteForAnswer(questionSlug, answerSlug, newVoteNumber) {
-    fetch(`http://localhost:8080/api/questions/${questionSlug}/${answerSlug}`, {
+    fetch(`${this.API_URL}/questions/${questionSlug}/${answerSlug}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json"
