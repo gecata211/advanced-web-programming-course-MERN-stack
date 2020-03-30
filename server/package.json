@@ -20,9 +20,5 @@
     "@babel/preset-env": "^7.8.7",
     "@babel/register": "^7.8.6"
   },
-  "description": "Small template for developing an API using express.js",
-  "engines": {
-    "node": "10.15.3",
-    "npm": "6.9.0"
-  }
+  "description": "Small template for developing an API using express.js"
 }
