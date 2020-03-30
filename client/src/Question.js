@@ -17,10 +17,12 @@ class Question extends React.Component {
     this._asyncRequest = this.props
       .getQuestion(this.props.questionSlug)
       .then(response => {
+        console.log(response);
         this._asyncRequest = null;
         return response.json();
       })
       .then(data => {
+        console.log(data);
         this.setState({
           question: data
         });
@@ -60,6 +62,8 @@ class Question extends React.Component {
   }
 
   render() {
+    console.log(this.state.question);
+
     if (this.state.question === null) {
       return "Loading";
     } else {
