@@ -41,7 +41,7 @@ class Question extends React.Component {
       );
 
       let newQuestion = this.state.question;
-      this.newQuestion.answers[index].voteNumber++;
+      newQuestion.answers[index].voteNumber++;
       this.setState({
         question: newQuestion
       });
@@ -52,7 +52,7 @@ class Question extends React.Component {
         Number(this.state.question.answers[index].voteNumber) - 1
       );
       let newQuestion = this.state.question;
-      this.newQuestion.answers[index].voteNumber--;
+      newQuestion.answers[index].voteNumber--;
       this.setState({
         question: newQuestion
       });

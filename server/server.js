@@ -7,10 +7,13 @@ import cors from "cors";
 import path from "path";
 
 const db = mongoose
-  .connect(process.env.REACT_APP_DATABASE_CONNECTION_STRING, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true
-  })
+  .connect(
+    "mongodb+srv://georgi-dimitrov:86m1sL06VD97b7uX@cluster0-qdyxt.mongodb.net/awp-q-and-a?retryWrites=true&w=majority",
+    {
+      useNewUrlParser: true,
+      useUnifiedTopology: true
+    }
+  )
   .then(() => console.log("Connected"))
   .catch(err => console.error(err));
 const port = process.env.PORT || 8080;
