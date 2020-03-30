@@ -1,12 +1,12 @@
 import React from "react";
-import { render } from "react-testing-library";
+import { render } from "@testing-library/react";
 import Questions from "./Questions";
 
 // Just some test data
 const data = [
   {
-    id: 1,
-    text: "How do I return the response from an Observable in Angular 2?",
+    slug: "how-do-i-return-the-response-from-an-observable-in-angular-2",
+    title: "How do I return the response from an Observable in Angular 2?",
     answers: [
       {
         text: "Observables are lazy so you have to subscribe to get the value.",
@@ -21,8 +21,8 @@ const data = [
     ]
   },
   {
-    id: 2,
-    text: "I have another question. What is..?",
+    slug: "i-have-another-question-what-is",
+    title: "I have another question. What is..?",
     answers: [
       { text: "Answer 1", votes: 2 },
       { text: "Answer 2", votes: 3 },
@@ -30,8 +30,8 @@ const data = [
     ]
   },
   {
-    id: 3,
-    text: "What IS this??",
+    slug: "what-is-this",
+    title: "What IS this??",
     answers: [
       { text: "Answer 1", votes: 0 },
       { text: "Answer 2", votes: 1 }
@@ -43,9 +43,9 @@ it("renders Questions with all titles", () => {
   const comp = <Questions questions={data} />;
   const { getByText } = render(comp);
 
-  expect(getByText(data[0].text)).toBeInTheDocument();
-  expect(getByText(data[1].text)).toBeInTheDocument();
-  expect(getByText(data[2].text)).toBeInTheDocument();
+  expect(getByText(data[0].title)).toBeInTheDocument();
+  expect(getByText(data[1].title)).toBeInTheDocument();
+  expect(getByText(data[2].title)).toBeInTheDocument();
 });
 
 it("does not render Question answers", () => {
