@@ -10,27 +10,29 @@ const question = {
   answers: [
     {
       text: "Observables are lazy so you have to subscribe to get the value.",
-      votes: 5
+      votes: 5,
     },
     { text: "You can use asyncPipe", votes: -2 },
     {
       text:
         "The reason that it's undefined is that you are making an asynchronous operation",
-      votes: 3
-    }
-  ]
+      votes: 3,
+    },
+  ],
 };
 
 it("renders the actual question", async () => {
   const comp = (
     <Question
-      getQuestion={slug => {
+      getQuestion={(slug) => {
         return Promise.resolve({ json: () => Promise.resolve(question) });
       }}
     />
   );
   const { getByText, getByLabelText } = render(comp);
-  await waitFor(() => expect(getByText(question.title)).toBeInTheDocument());
+  setTimeout(() => {
+    expect(getByText(question.title)).toBeInTheDocument();
+  }, 1000);
 });
 
 // it("renders all answers for a Question", () => {
