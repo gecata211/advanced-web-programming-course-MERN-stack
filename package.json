@@ -10,5 +10,8 @@
     "install": "cd client && yarn install",
     "build": "cd client && yarn run build",
     "postinstall": "yarn run build"
+  },
+  "engines": {
+    "node": "12.16.1"
   }
 }
